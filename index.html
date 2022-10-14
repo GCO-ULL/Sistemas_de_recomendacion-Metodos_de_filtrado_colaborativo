@@ -43,11 +43,22 @@
       <h3>
         N&uacute;mero de vecinos considerado
       </h3>
-      <form>
         <label for="neighbour">N&uacute;mero de vecinos:</label>
-        <input type="number" id="neighbour" name="neighbour">
-        <input type="submit">
+        <input type="number" id="neighbour" name="neighbour" min="1">
+      <h3>
+        Tipo de predicci&oacute;n
+      </h3>
+      <form>
+        <p>
+          Seleccione la predicci&oacute;n a emplear
+        </p>
+          <input type="radio" id="simple_prediction" name="prediction" value="simple_prediction">
+          <label for="simple_prediction">Predicci&oacute;n simple</label><br>
+          <input type="radio" id="avg_difference" name="prediction" value="avg_difference">
+          <label for="avg_difference">Diferencia con la media</label><br>
       </form>
+      <input type="button" value="Calcular">
     </div>
+    <!--Falta poner campos obligatorios-->
   </body>
 </html>
