@@ -6,8 +6,10 @@
 
 function sumatorio(u, v, matrix) {
   let result
+  let mediaU = media(u, matrix)
+  let mediaV = media(v, matrix)
   for (let i = 0; i < matrix[u].size(); i++) {
-  result += matrix[u][i] - media(u, matrix) * matrix[v][i] - media(v, matrix)
+  result += matrix[u][i] - mediaU * matrix[v][i] - mediaV
   }
   return result
 }
