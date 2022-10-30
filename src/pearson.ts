@@ -1,7 +1,10 @@
- function pearson(matrix) {
-    let u
-    let v
-    return sumatorio(u, v, matrix) / sumatorioCuadrado(u, matrix)
+function pearson(matrix) {
+  let u = matrix[0]
+  for (let i = 2; i < matrix[1]; i++) {
+    let v = matrix[i]
+    let result = sumatorio(u, v, matrix) / sumatorioCuadrado(u, v, matrix)
+    console.log('Usuario ', v, result)
+  }
 }
 
 function sumatorio(u, v, matrix) {
@@ -14,7 +17,7 @@ function sumatorio(u, v, matrix) {
   return result
 }
 
-function sumatorioCuadrado(u, matrix) {
+function sumatorioCuadrado(u, v, matrix) {
   let result_u
   let result_v
   let final_result
@@ -26,11 +29,11 @@ function sumatorioCuadrado(u, matrix) {
   return final_result
 }
 
-function media(u, matrix) {
+function media(x, matrix) {
   let result
-  for (let i = 0; i < matrix[u].size(); i++) {
-    result += matrix[u][i]
+  for (let i = 0; i < matrix[x].size(); i++) {
+    result += matrix[x][i]
   }
-  return result / matrix[u].size()
+  return result / matrix[x].size()
 }
   

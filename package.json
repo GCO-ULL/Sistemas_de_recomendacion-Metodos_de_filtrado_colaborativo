@@ -1,0 +1,23 @@
+{
+  "devDependencies": {
+    "@types/node": "^18.11.7"
+  },
+  "name": "sistemas_de_recomendacion-metodos_de_filtrado_colaborativo",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GCO-ULL/Sistemas_de_recomendacion-Metodos_de_filtrado_colaborativo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GCO-ULL/Sistemas_de_recomendacion-Metodos_de_filtrado_colaborativo/issues"
+  },
+  "homepage": "https://github.com/GCO-ULL/Sistemas_de_recomendacion-Metodos_de_filtrado_colaborativo#readme"
+}
