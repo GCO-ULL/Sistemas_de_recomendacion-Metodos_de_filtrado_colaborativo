@@ -1,5 +1,5 @@
 import {readFile} from 'fs';
-import {pearson} from './pearson';
+import {pearson} from './funtion';
 
 // console.log("hello world");
 leerArchivo('infile.txt');

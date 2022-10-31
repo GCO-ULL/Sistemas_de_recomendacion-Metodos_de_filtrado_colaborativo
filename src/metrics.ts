@@ -7,12 +7,13 @@ let m = [
     [ 1, 5, 5, 2]
 ]
 
+// console.log(pearsonDistance(m[0], m[1]));
 /**
  * Calcula la media entre los elementos de un vector numérico
  * @param {number[]} vector Vector a calcular la media
  * @returns Media
  */
-function vectorAverage(vector: number[]) : number {
+export function vectorAverage(vector: number[]) : number {
     let result = 0;
     for (let i = 0; i < vector.length; i++) {
         result += vector[i]
@@ -83,7 +84,7 @@ export function cosineDistance(u: number[], v: number[]): number | undefined {
  * @param {number} matrix Matriz a emplear
  * @return Distancia euclídea
  */
-function euclideanDistance(u: number[], v: number[]): number | undefined {
+export function euclideanDistance(u: number[], v: number[]): number | undefined {
     if (u.length != v.length)
         return undefined;
 

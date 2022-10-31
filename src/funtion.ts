@@ -1,4 +1,7 @@
 
+import {metric} from './predictions';
+import {pearsonDistance, cosineDistance, euclideanDistance} from './metrics';
+
 let matri = [
   [ '1' ],
   [ '5' ],
@@ -32,7 +35,7 @@ function newMatrix(matrix: string[][]) {
  * @param matrix matriz original sin valores iniciales
  * @returns devuelve un array de arrays con la posicion de los items no conocidos
  */
-function search(matrix:string[][]): number[][] {
+export function search(matrix:string[][]): number[][] {
   let toSearch:number[][] = [];
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix.length; j++) {
@@ -44,6 +47,8 @@ function search(matrix:string[][]): number[][] {
   return toSearch;
 }
 
+  
+
 /**
  * Funcion encaragda de eliminar las clolumnas donde se encuentran los items no
  * conocidos
@@ -52,7 +57,7 @@ function search(matrix:string[][]): number[][] {
  * @returns devuelve la matriz sin las columnas donde se encuentran los items no
  * conocidos
  */
-function finalMatrix(matrix: string[][], search: number[][]) {
+export function finalMatrix(matrix: string[][], search: number[][]) {
   let finalMatrix: number[][] = [];
   let aux: number = 0;
   for (let i = 0; i < matrix.length; i++) {
@@ -142,3 +147,49 @@ function media(x: number, matrix: number[][]) : number {
   }
   return result / (matrix[x].length);
 }
+
+/**
+ * Calcula las métricas de todos las filas de una matriz numérica dada.
+ * @param matrix Matrix a emplear
+ * @param t Métrica a utilziar
+ * @returns Matriz con valores de las métricas.
+ */
+export function metricResult(matrix: number[][], t: metric) {
+  let result: number[][] = [];
+
+  for (let i: number = 0; i < matrix.length; i++) {
+    let aux: number[] = [];
+    let j = 0;
+    while (j < matrix.length) {
+      switch(t) {
+        case 'pearsonDistance':
+            aux.push(pearsonDistance(matrix[i], matrix[j]));
+            j++;
+            break;
+        case 'cosineDistance':
+            aux.push(cosineDistance(matrix[i], matrix[j]))
+            j++;
+            break;
+        case 'euclideanDistance':
+            aux.push(euclideanDistance(matrix[i], matrix[j]))
+            j++;
+            break;
+        default:
+            return undefined;
+      }
+    }
+    result.push(aux);
+  }
+  return result;
+}
+
+
+let m = [
+  [ 5, 3, 4, 4],
+  [ 3, 1, 2, 3],
+  [ 4, 3, 4, 3],
+  [ 3, 3, 1, 5]
+]
+
+
+console.log(metricResult(m, "pearsonDistance"));

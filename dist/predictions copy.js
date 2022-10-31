@@ -33,24 +33,9 @@ function simplePredict(matrix, v, t) {
     return 1;
 }
 function searchNeighbours(u, matrixSim, v) {
-    if (v < 0 || v >= matrix.length - 1)
-        return undefined;
     let result = [];
-    let vector = matrixSim[u];
-    let aux = [];
-    for (let i = 0; i < vector.length; i++) {
-        if (u != i) {
-            aux.push(vector[i]);
-        }
-    }
-    aux = aux.sort();
-    let neighboursIt = 0;
-    for (let i = aux.length - 1; i >= aux.length - v; i--) {
-        result.push(vector.indexOf(aux[i]));
-    }
-    // let maxNumber: number = Math.max(...aux);
-    // result.push(vector.indexOf(maxNumber));
-    console.log(result);
+    let min = Math.min(...matrixSim[u]);
+    console.log(min);
     //     // for (let i: number = 0; i < matrixSim[u].length; i++) {
     //             }
     //}
@@ -77,5 +62,5 @@ let m = [
     [4, 3, 4, 3],
     [3, 3, 1, 5]
 ];
-searchNeighbours(0, (0, funtion_1.metricResult)(m, "pearsonDistance"), 4);
+searchNeighbours(0, (0, funtion_1.metricResult)(m, "pearsonDistance"), 2);
 //console.log(simplePredict(0, 0, [1, 2], m, "consineDistance"));

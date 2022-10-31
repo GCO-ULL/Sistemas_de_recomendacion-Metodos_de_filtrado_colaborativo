@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cosineDistance = exports.pearsonDistance = void 0;
+exports.euclideanDistance = exports.cosineDistance = exports.pearsonDistance = exports.vectorAverage = void 0;
 let m = [
     [5, 3, 4, 4],
     [3, 1, 2, 3],
@@ -8,6 +8,12 @@ let m = [
     [3, 3, 1, 5],
     [1, 5, 5, 2]
 ];
+// console.log(pearsonDistance(m[0], m[1]));
+/**
+ * Calcula la media entre los elementos de un vector numérico
+ * @param {number[]} vector Vector a calcular la media
+ * @returns Media
+ */
 function vectorAverage(vector) {
     let result = 0;
     for (let i = 0; i < vector.length; i++) {
@@ -15,6 +21,7 @@ function vectorAverage(vector) {
     }
     return result / (vector.length);
 }
+exports.vectorAverage = vectorAverage;
 /**
  * Calcula al distancia de Pearson entre 2 vectores
  * @param {number} u Vector numero 1
@@ -34,7 +41,11 @@ function pearsonDistance(u, v) {
         sumatoryUBottom += Math.pow(u[i] - averageU, 2);
         sumatoryVBottom += Math.pow(v[i] - averageV, 2);
     }
-    return sumatoryTop / Math.sqrt(sumatoryUBottom * sumatoryVBottom);
+    let result = sumatoryTop / Math.sqrt(sumatoryUBottom * sumatoryVBottom);
+    if (result < -1 || result > 1)
+        return undefined;
+    else
+        return result;
 }
 exports.pearsonDistance = pearsonDistance;
 /**
@@ -77,4 +88,4 @@ function euclideanDistance(u, v) {
     }
     return Math.sqrt(sumatory);
 }
-console.log(pearsonDistance(m[0], m[1]));
+exports.euclideanDistance = euclideanDistance;
