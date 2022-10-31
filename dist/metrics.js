@@ -1,27 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.euclideanDistance = exports.cosineDistance = exports.pearsonDistance = exports.vectorAverage = void 0;
-let m = [
-    [5, 3, 4, 4],
-    [3, 1, 2, 3],
-    [4, 3, 4, 3],
-    [3, 3, 1, 5],
-    [1, 5, 5, 2]
-];
-// console.log(pearsonDistance(m[0], m[1]));
-/**
- * Calcula la media entre los elementos de un vector numérico
- * @param {number[]} vector Vector a calcular la media
- * @returns Media
- */
-function vectorAverage(vector) {
-    let result = 0;
-    for (let i = 0; i < vector.length; i++) {
-        result += vector[i];
-    }
-    return result / (vector.length);
-}
-exports.vectorAverage = vectorAverage;
+exports.euclideanDistance = exports.cosineDistance = exports.pearsonDistance = void 0;
+const funtion_1 = require("./funtion");
 /**
  * Calcula al distancia de Pearson entre 2 vectores
  * @param {number} u Vector numero 1
@@ -31,8 +11,8 @@ exports.vectorAverage = vectorAverage;
 function pearsonDistance(u, v) {
     if (u.length != v.length)
         return undefined;
-    let averageU = vectorAverage(u);
-    let averageV = vectorAverage(v);
+    let averageU = (0, funtion_1.vectorAverage)(u);
+    let averageV = (0, funtion_1.vectorAverage)(v);
     let sumatoryTop = 0;
     let sumatoryUBottom = 0;
     let sumatoryVBottom = 0;

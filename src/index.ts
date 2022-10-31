@@ -1,14 +1,29 @@
 import {readFile} from 'fs';
-import {pearson} from './funtion';
+
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+let matri = [
+  [ '1' ],
+  [ '5' ],
+  [ '5', '3', '4', '4', '-' ],
+  [ '3', '1', '2', '3', '3' ],
+  [ '4', '3', '4', '3', '5' ],
+  [ '3', '3', '1', '5', '4' ],
+  [ '1', '5', '5', '2', '1' ]
+]
+
 
 // console.log("hello world");
-leerArchivo('infile.txt');
+//leerArchivo('infile.txt');
 
 // function readFile(matrix) {
 //   instanceOfFileReader.readAsArrayBuffer(blob);
   
 // }
-
+/*
 function leerArchivo(file) {
   // readFile(file, (err, data) => {
   //   if (err) {
@@ -40,3 +55,14 @@ function example() {
     //leerArchivo(doc.files[0].name);
   }
 }
+*/
+readline.question('Who are you?', (name) => {
+    console.log(typeof name);
+    if (typeof name == 'number') {
+      console.log(name + 2);
+    } else {
+      console.log('No es un numero');
+    }
+    readline.close();
+  });
+

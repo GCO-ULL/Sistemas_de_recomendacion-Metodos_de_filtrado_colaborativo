@@ -1,25 +1,4 @@
-
-let m = [
-    [ 5, 3, 4, 4],
-    [ 3, 1, 2, 3],
-    [ 4, 3, 4, 3],
-    [ 3, 3, 1, 5],
-    [ 1, 5, 5, 2]
-]
-
-// console.log(pearsonDistance(m[0], m[1]));
-/**
- * Calcula la media entre los elementos de un vector numérico
- * @param {number[]} vector Vector a calcular la media
- * @returns Media
- */
-export function vectorAverage(vector: number[]) : number {
-    let result = 0;
-    for (let i = 0; i < vector.length; i++) {
-        result += vector[i]
-    }
-    return result / (vector.length);
-}  
+import {vectorAverage} from './funtion';
 
 /**
  * Calcula al distancia de Pearson entre 2 vectores
