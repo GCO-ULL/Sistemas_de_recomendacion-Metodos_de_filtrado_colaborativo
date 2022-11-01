@@ -1,4 +1,33 @@
 /**
+ * Convierte una matriz en una string con '\n'
+ * @param matrix Matriz a convertir
+ * @returns Cadena resultante
+ */
+function matrixToString(matrix) {
+    let result = "";
+    matrix.forEach((i) => {
+        i.forEach((j) => {
+            result += j + " ";
+        });
+        result += "\n";
+    });
+    return result;
+}
+/**
+ * Limpia la matriz eliminando los posibles '\r'
+ * @param matrix Matriz a limpiar
+ * @returns Matriz limpia
+ */
+function cleanMatrix(matrix) {
+    let result = matrix;
+    for (let i = 0; i < matrix.length; i++)
+        if (result[i][result.length - 1] == '-\r')
+            result[i][result.length - 1] = '-';
+        else
+            result[i][result.length - 1] = parseInt(result[i][result.length - 1]).toString();
+    return result;
+}
+/**
  * Calcula la media entre los elementos de un vector numérico
  * @param {number[]} vector Vector a calcular la media
  * @returns Media
@@ -32,7 +61,7 @@ function search(matrix) {
     let toSearch = [];
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix.length; j++) {
-            if (matrix[i][j] == '-' || matrix[i][j] == '-\r') {
+            if (matrix[i][j] == '-') {
                 toSearch.push([i, j]);
             }
         }
@@ -60,49 +89,6 @@ function finalMatrix(matrix, search) {
         finalMatrix.push(auxMatrix);
     }
     return finalMatrix;
-}
-/**
- * Funcion encargada de calcular el sumatorio superior de la formula de pearson
- * @param u Primera persona
- * @param v Segunda persona
- * @param matrix matriz original sin las columnas donde se encuentran los items no conocidos
- * @returns devuelve el resultado del sumatorio superior de la formula de pearson
- */
-function sumatorio(u, v, matrix) {
-    let result = 0;
-    let mediaU = media(u, matrix);
-    let mediaV = media(v, matrix);
-    for (let i = 0; i < matrix[u].length; i++) {
-        result += (matrix[u][i] - mediaU) * (matrix[v][i] - mediaV);
-    }
-    return result;
-}
-/**
- * Funcion encargada de calcular el sumatorio inferior de la formula de pearson
- * y luego aplicarla la raiz cuadrada
- * @param u Primera persona
- * @param v Segunda persona
- * @param matrix matriz original sin las columnas donde se encuentran los items
- * no conocidos
- * @returns devuelve el resultado del sumatorio inferior de la formula de pearson
- */
-function sumatorioCuadrado(u, v, matrix) {
-    let result_u = 0;
-    let result_v = 0;
-    let final_result;
-    for (let i = 0; i < matrix[u].length; i++) {
-        result_u += Math.pow(matrix[u][i] - media(u, matrix), 2);
-        result_v += Math.pow(matrix[v][i] - media(v, matrix), 2);
-    }
-    final_result = Math.sqrt(result_u * result_v);
-    return final_result;
-}
-function media(x, matrix) {
-    let result = 0;
-    for (let i = 0; i < matrix[x].length; i++) {
-        result += matrix[x][i];
-    }
-    return result / (matrix[x].length);
 }
 /**
  * Calcula las métricas de todos las filas de una matriz numérica dada.
@@ -276,19 +262,26 @@ function averagePredict(u, item, matrix, v, t) {
     }
     return vectorAverage(finalM[u]) + sumaryTop / sumaryBottom;
 }
-let matrixOrg;
+// Matriz leida
+let matrixOrg = [];
 readFile();
+/**
+ * Lectura del fichero de entrada
+ */
 function readFile() {
     document.getElementById('inputFile').addEventListener('change', function () {
         var file = new FileReader();
         file.onload = () => {
-            // document.getElementById('output').textContent = file.result as string;
-            console.log(file.result);
             matrixOrg = readMatrix(file.result);
         };
         file.readAsText(this.files[0]);
     });
 }
+/**
+ * Transforma una string en una matriz separadas por saltos de linea
+ * @param matrix Matriz (string)
+ * @returns Matriz resultante
+ */
 function readMatrix(matrix) {
     let newMatrix = [];
     let auxString = matrix.split('\n');
@@ -296,11 +289,6 @@ function readMatrix(matrix) {
         newMatrix.push(auxString[i].split(' '));
     }
     return newMatrix;
-}
-function main() {
-    document.getElementById('pearson');
-    console.log(document.getElementById('cosine'));
-    console.log(document.getElementById('euclidean'));
 }
 $("#calculate").click(function () {
     // Lectura de tipo de métrica
@@ -333,30 +321,42 @@ $("#calculate").click(function () {
     if (stringAlert != "")
         alert(stringAlert);
     else { // Si no hay alertas
-        let items = search(matrixOrg);
-        let values = [];
+        let matrix = cleanMatrix(matrixOrg); // Matriz a emplear
+        let items = search(matrix); // Items a calcular
+        let values = []; // Valores de los items calculados
+        let error = false;
         switch (prediction) {
             case 'simple_prediction':
                 items.forEach((i) => {
-                    let aux = simplePredict(i[0], i[1], matrixOrg, neighbours, metric);
-                    if (aux)
+                    let aux = simplePredict(i[0], i[1], matrix, neighbours, metric);
+                    console.log("AUX", aux);
+                    if (typeof aux == 'undefined')
+                        error = true;
+                    else
                         values.push(Math.round(aux));
                 });
                 break;
             case 'avg_difference':
                 items.forEach((i) => {
-                    let aux = averagePredict(i[0], i[1], matrixOrg, neighbours, metric);
+                    let aux = averagePredict(i[0], i[1], matrix, neighbours, metric);
                     if (aux)
                         values.push(Math.round(aux));
+                    else
+                        error = true;
                 });
                 break;
             default:
                 break;
         }
-        let result = matrixOrg;
-        for (let i = 0; i < items.length; i++) {
-            result[items[i][0]][items[i][1]] = values[i].toString();
+        // RESULTADO
+        if (error)
+            alert("Hubo un error en el cálculo, revise los parámetros introducidos");
+        else {
+            let result = matrix;
+            for (let i = 0; i < items.length; i++) {
+                result[items[i][0]][items[i][1]] = values[i].toString();
+            }
+            alert("RESULTADO OBTENIDO:\n\n" + matrixToString(matrix));
         }
-        console.log("RESULT:", result);
     }
 });
