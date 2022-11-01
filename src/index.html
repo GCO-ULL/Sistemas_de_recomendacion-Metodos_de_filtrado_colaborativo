@@ -50,11 +50,11 @@
         <p>
           Seleccione la m&eacute;trica a utilizar
         </p>
-          <input type="radio" id="pearson" name="metric" value="pearson">
+          <input type="radio" id="pearson" name="metric" value="pearsonDistance">
           <label for="pearson">Correlaci&oacute;n de Pearson</label><br>
-          <input type="radio" id="cosine" name="metric" value="cosine">
+          <input type="radio" id="cosine" name="metric" value="cosineDistance">
           <label for="cosine">Distancia coseno</label><br>
-          <input type="radio" id="euclidean" name="metric" value="euclidean">
+          <input type="radio" id="euclidean" name="metric" value="euclideanDistance">
           <label for="euclidean">Distancia eucl&iacute;dea</label>
       </form>
       <h3>
@@ -74,12 +74,11 @@
           <input type="radio" id="avg_difference" name="prediction" value="avg_difference">
           <label for="avg_difference">Diferencia con la media</label><br>
       </form>
-      <input type="button" value="Calcular" onclick="main()" >
+      <input id="calculate" type="button" value="Calcular">
     </div>
     <!-- <span id="file"></span> -->
     <!--Falta poner campos obligatorios-->
-    
-    
+    <script src ="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src = '../dist/index.js' type="text/javascript"></script>
   </body>
 </html>

@@ -40,11 +40,33 @@ function readMatrix(matrix) {
 }
 
 function main() {
-  console.log(document.getElementById('pearson'));
+  document.getElementById('pearson');
   console.log(document.getElementById('cosine'));
   console.log(document.getElementById('euclidean'));
 }
 
+$("#calculate").click(function() {
+  // Lectura de tipo de métrica
+  var metrics = [...document.getElementsByName("metric")] as HTMLInputElement[];
+  metrics = metrics.filter(m => m.checked);
+  var metric = undefined;
+  if (metrics.length != 0) 
+    metric = metrics[0].value;
 
+  // Lectura de numero de vecinos
+  var neighbourElement = document.getElementById("neighbour") as HTMLInputElement;
+  var neighbours = undefined;
+  if (neighbourElement.value)
+    neighbours = parseInt(neighbourElement.value);
 
+  // Lectura de tipo de predicción
+  var predictions = [...document.getElementsByName("prediction")] as HTMLInputElement[];
+  predictions = predictions.filter(p => p.checked);
+  var prediction = undefined;
+  if (predictions.length != 0) 
+    prediction = predictions[0].value;
 
+  console.log ("Metric = " , metric);
+  console.log("Neighbours = " , neighbours);
+  console.log("prediction = ", prediction);
+});

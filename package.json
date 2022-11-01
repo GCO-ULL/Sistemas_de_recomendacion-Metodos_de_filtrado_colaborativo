@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@types/jquery": "^3.5.14",
     "@types/node": "^18.11.7"
   },
   "name": "sistemas_de_recomendacion-metodos_de_filtrado_colaborativo",
@@ -19,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/GCO-ULL/Sistemas_de_recomendacion-Metodos_de_filtrado_colaborativo/issues"
   },
-  "homepage": "https://github.com/GCO-ULL/Sistemas_de_recomendacion-Metodos_de_filtrado_colaborativo#readme"
+  "homepage": "https://github.com/GCO-ULL/Sistemas_de_recomendacion-Metodos_de_filtrado_colaborativo#readme",
+  "dependencies": {
+    "typescript": "^4.8.4"
+  }
 }
