@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.averagePredict = exports.simplePredict = void 0;
-const funtion_1 = require("./funtion");
+import { finalMatrix, metricResult, search, searchNeighbours, vectorAverage } from './funtion';
 /**
  * Cálculo de predicciones simple
  * @param u Usuario u
@@ -10,13 +7,13 @@ const funtion_1 = require("./funtion");
  * @param v Número de vecinos a utilizar
  * @param t Metrica a emplear
  */
-function simplePredict(u, item, matrix, v, t) {
+export function simplePredict(u, item, matrix, v, t) {
     if (v < 1 || v > matrix.length || u < 0 || u > matrix.length || item < 0 || item > matrix[u].length)
         return undefined;
     // Matriz de similitudes
-    let sim = (0, funtion_1.metricResult)((0, funtion_1.finalMatrix)(matrix, (0, funtion_1.search)(matrix)), t);
+    let sim = metricResult(finalMatrix(matrix, search(matrix)), t);
     // Vector de vecinos cercanos
-    let neighbours = (0, funtion_1.searchNeighbours)(u, sim, v);
+    let neighbours = searchNeighbours(u, sim, v);
     // Sumatorios
     let sumaryBottom = 0;
     let sumaryTop = 0;
@@ -26,7 +23,6 @@ function simplePredict(u, item, matrix, v, t) {
     }
     return sumaryTop / sumaryBottom;
 }
-exports.simplePredict = simplePredict;
 /**
  * Cálculo de predicciones con la media
  * @param u Usuario u
@@ -35,23 +31,22 @@ exports.simplePredict = simplePredict;
  * @param v Número de vecinos a utilizar
  * @param t Metrica a emplear
  */
-function averagePredict(u, item, matrix, v, t) {
+export function averagePredict(u, item, matrix, v, t) {
     if (v < 1 || v > matrix.length || u < 0 || u > matrix.length || item < 0 || item > matrix[u].length)
         return undefined;
     // Matriz sin '-'
-    let finalM = (0, funtion_1.finalMatrix)(matrix, (0, funtion_1.search)(matrix));
+    let finalM = finalMatrix(matrix, search(matrix));
     // Matriz de similitudes
-    let sim = (0, funtion_1.metricResult)(finalM, t);
+    let sim = metricResult(finalM, t);
     // Vector de vecinos cercanos
-    let neighbours = (0, funtion_1.searchNeighbours)(u, sim, v);
+    let neighbours = searchNeighbours(u, sim, v);
     // Sumatorios
     let sumaryBottom = 0;
     let sumaryTop = 0;
     // Cálculo
     for (let j = 0; j < neighbours.length; j++) {
-        sumaryTop += sim[u][neighbours[j]] * (parseInt(matrix[neighbours[j]][item])) - (0, funtion_1.vectorAverage)(finalM[neighbours[j]]);
+        sumaryTop += sim[u][neighbours[j]] * (parseInt(matrix[neighbours[j]][item])) - vectorAverage(finalM[neighbours[j]]);
         sumaryBottom += Math.abs(sim[u][neighbours[j]]);
     }
-    return (0, funtion_1.vectorAverage)(finalM[u]) + sumaryTop / sumaryBottom;
+    return vectorAverage(finalM[u]) + sumaryTop / sumaryBottom;
 }
-exports.averagePredict = averagePredict;

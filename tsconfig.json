@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "ES2020",
     "outDir": "./dist",
     "rootDir": "./src",
-    "module": "CommonJS"
-  }
+    "module": "commonJS"  
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }
