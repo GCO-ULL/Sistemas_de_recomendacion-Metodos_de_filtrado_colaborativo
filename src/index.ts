@@ -388,10 +388,10 @@ $("#calculate").click(function() {
       case 'avg_difference':
         items.forEach((i) => {
           let aux: number | undefined = averagePredict(i[0], i[1], matrix, neighbours, metric);
-          if (aux) 
-            values.push(Math.round(aux as number));
-          else
+          if (typeof aux == 'undefined') 
             error = true;
+          else
+            values.push(Math.round(aux as number));
         });
         break;
       default:

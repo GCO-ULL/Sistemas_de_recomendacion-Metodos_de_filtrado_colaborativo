@@ -329,7 +329,6 @@ $("#calculate").click(function () {
             case 'simple_prediction':
                 items.forEach((i) => {
                     let aux = simplePredict(i[0], i[1], matrix, neighbours, metric);
-                    console.log("AUX", aux);
                     if (typeof aux == 'undefined')
                         error = true;
                     else
@@ -339,10 +338,10 @@ $("#calculate").click(function () {
             case 'avg_difference':
                 items.forEach((i) => {
                     let aux = averagePredict(i[0], i[1], matrix, neighbours, metric);
-                    if (aux)
-                        values.push(Math.round(aux));
-                    else
+                    if (typeof aux == 'undefined')
                         error = true;
+                    else
+                        values.push(Math.round(aux));
                 });
                 break;
             default:
@@ -350,7 +349,7 @@ $("#calculate").click(function () {
         }
         // RESULTADO
         if (error)
-            alert("Hubo un error en el cálculo, revise los parámetros introducidos");
+            alert("Hubo un error en el calculo, revise los parametros introducidos");
         else {
             let result = matrix;
             for (let i = 0; i < items.length; i++) {
