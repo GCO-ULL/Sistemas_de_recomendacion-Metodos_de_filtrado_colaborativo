@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Read Text File Tutorial</title>
+  </head>
+  <body>
+    <!-- <input type="file" name="inputFile" id="inputFile"> -->
+    <br>
+    
+      <input type="file" id="myFile" name="filename" onclick="main(this.files[0])">
+      <input type="submit" value="Calcualar" onclick="read()">
+      
+      <!-- <input type="button" value="Calcular" onclick="read()"> -->
+      <pre id="output"></pre>
+    <script src = '../dist/index.js' type="text/javascript"></script>
+  </body>
+</html>

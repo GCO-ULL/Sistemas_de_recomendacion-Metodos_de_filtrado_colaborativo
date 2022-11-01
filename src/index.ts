@@ -1,68 +1,50 @@
-import {readFile} from 'fs';
+// import {readFile} from 'fs';
 
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// const rl = require('readline').createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+// });
 
-let matri = [
-  [ '1' ],
-  [ '5' ],
-  [ '5', '3', '4', '4', '-' ],
-  [ '3', '1', '2', '3', '3' ],
-  [ '4', '3', '4', '3', '5' ],
-  [ '3', '3', '1', '5', '4' ],
-  [ '1', '5', '5', '2', '1' ]
-]
+// let matri = [
+//   [ '1' ],
+//   [ '5' ],
+//   [ '5', '3', '4', '4', '-' ],
+//   [ '3', '1', '2', '3', '3' ],
+//   [ '4', '3', '4', '3', '5' ],
+//   [ '3', '3', '1', '5', '4' ],
+//   [ '1', '5', '5', '2', '1' ]
+// ]
 
+let matrixOrg;
 
-// console.log("hello world");
-//leerArchivo('infile.txt');
-
-// function readFile(matrix) {
-//   instanceOfFileReader.readAsArrayBuffer(blob);
-  
-// }
-/*
-function leerArchivo(file) {
-  // readFile(file, (err, data) => {
-  //   if (err) {
-  //     console.log('No existe el fichero');
-  //   } else {
-  //     console.log(data.toString());
-  //   }
-  // });
-  let matrix = [];
-  readFile(file, (_, data) => {
-    console.log(data.toString());
-    let auxString = data.toString().split('\n');
-    // console.log('\n');
-    console.log(matrix);
-    for (let i = 0; i < auxString.length; i++) {
-      matrix.push(auxString[i].split(' '));
+readFile()
+function readFile() {
+  (<HTMLInputElement>document.getElementById('inputFile')).addEventListener('change', function() {
+    var file = new FileReader();
+    file.onload = () => {
+      // document.getElementById('output').textContent = file.result as string;
+      console.log(file.result);
+      matrixOrg = readMatrix(file.result as string);
     }
-    // console.log('\n');
-    console.log(matrix);
+    file.readAsText(this.files[0]);
   });
-  // pearson(matrix);
 }
 
-function example() {
-  var reader = new FileReader();
-  var doc = document.getElementById("myfile") as HTMLInputElement | null;
-  if (doc) {
-    console.log(doc.value);
-    //leerArchivo(doc.files[0].name);
+function readMatrix(matrix) {
+  let newMatrix = [];
+  let auxString = matrix.split('\n');
+  for (let i = 0; i < auxString.length; i++) {
+    newMatrix.push(auxString[i].split(' '));
   }
+  return newMatrix;
 }
-*/
-readline.question('Who are you?', (name) => {
-    console.log(typeof name);
-    if (typeof name == 'number') {
-      console.log(name + 2);
-    } else {
-      console.log('No es un numero');
-    }
-    readline.close();
-  });
+
+function main() {
+  console.log(document.getElementById('pearson'));
+  console.log(document.getElementById('cosine'));
+  console.log(document.getElementById('euclidean'));
+}
+
+
+
 
