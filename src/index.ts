@@ -36,7 +36,7 @@ function newMatrix(matrix: string[][]) {
   let toSearch:number[][] = [];
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix.length; j++) {
-      if (matrix[i][j] == '-') {
+      if (matrix[i][j] == '-' || matrix[i][j] == '-\r') {
         toSearch.push([i, j]);
       }
     }
@@ -348,7 +348,6 @@ function main() {
   console.log(document.getElementById('euclidean'));
 }
 
-let result;
 
 $("#calculate").click(function() {
   // Lectura de tipo de métrica
@@ -386,16 +385,33 @@ $("#calculate").click(function() {
   if (stringAlert != "")
     alert(stringAlert);
   else { // Si no hay alertas
+    let items: number[][] = search(matrixOrg);
+    let values: number[] = [];
     switch(prediction) {
       case 'simple_prediction':
-        result = simplePredict(0, 0, matrixOrg, neighbours, metric);
-        console.log("Simple prediction");
+        items.forEach((i) => {
+          let aux: number | undefined = simplePredict(i[0], i[1], matrixOrg, neighbours, metric);
+          if (aux) 
+            values.push(Math.round(aux as number));
+        });
         break;
       case 'avg_difference':
-        console.log("AVG prediction");
+        items.forEach((i) => {
+          let aux: number | undefined = averagePredict(i[0], i[1], matrixOrg, neighbours, metric);
+          if (aux) 
+            values.push(Math.round(aux as number));
+        });
         break;
       default:
         break;
     }
+
+    let result: string[][] = matrixOrg;
+
+    for (let i: number = 0; i < items.length; i++) {
+      result[items[i][0]][items[i][1]] = values[i].toString();
+    }
+
+    console.log("RESULT:", result);
   }
 });
