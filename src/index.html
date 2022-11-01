@@ -24,25 +24,10 @@
             El fichero debe seguir el siguiente formato.
           </a>
         </p>
-        <!-- <input type="file" id="myfile" name="myfile" onchange="main(this.files[0])"><br><br> -->
         <input type="file" name="inputFile" id="inputFile">
         <br>
         <br>
         <pre id="output"></pre>
-        <!-- <script type="text/javascript">
-          document.getElementById('inputFile').addEventListener('change', function() {
-            var file = new FileReader();
-            file.onload = () => {
-              //document.getElementById('output').textContent = file.result;
-              console.log(file.result);
-            }
-            file.readAsText(this.files[0]);
-          });
-        </script>
-        -->
-        
-    
-        
       <h3>
         M&eacute;trica a elegir
       </h3>
@@ -76,8 +61,6 @@
       </form>
       <input id="calculate" type="button" value="Calcular">
     </div>
-    <!-- <span id="file"></span> -->
-    <!--Falta poner campos obligatorios-->
     <script src ="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src = '../dist/index.js' type="text/javascript"></script>
   </body>

@@ -103,7 +103,7 @@ function newMatrix(matrix: string[][]) {
  * @param t Métrica a utilziar
  * @returns Matriz con valores de las métricas.
  */
- function metricResult(matrix: number[][], t: metric) {
+function metricResult(matrix: number[][], t: metric) {
   let result: number[][] = [];
 
   for (let i: number = 0; i < matrix.length; i++) {
